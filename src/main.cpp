@@ -45,8 +45,8 @@ void runTheTimer(void)
   wait(750, timeUnits::msec);
   Brain.Screen.clearScreen(color::green);
   Brain.Screen.printAt(45, 60, "GO!");
-  playChargeSound();
   countdown.reset();
+  playChargeSound();
   countdownRunning = true;
   playChangeNote = true;
 }
@@ -58,7 +58,7 @@ int main() {
 
   while(1) {
       
-    // Allow other tasks to run
+    // Sleep the thread at 250ms, to avoid some screen refresh hiccups
     this_thread::sleep_for(250);
 
     if(countdownRunning == true)
@@ -76,22 +76,22 @@ int main() {
           if(((int)countdown.value() % 2) == 0)
           {
             Brain.Screen.setFont(fontType::mono40);
-            Brain.Screen.printAt(05, 60, "CHANGE!");     
+            Brain.Screen.printAt(05, 60, "CHANGE!");
+            if(playChangeNote == true)
+            {
+              Brain.playNote(1, 3, 100);
+              wait(100, timeUnits::msec);
+              playChangeNote = false;
+            }
           }
           else
           {
             Brain.Screen.setFont(fontType::mono60);
-            Brain.Screen.printAt(45, 60, "%02d", 60 - (int)countdown.value());     
+            Brain.Screen.printAt(45, 60, "%02d", 60 - (int)countdown.value());
+            playChangeNote = true;
           }
 
-          if(playChangeNote == true)
-          {
-            Brain.playNote(1, 3, 100);
-            wait(100, timeUnits::msec);
-            Brain.playNote(1, 3, 100);
-            playChangeNote = false;
-          } 
-        break;
+       break;
 
         case 36 ... 50:
           Brain.Screen.setFont(fontType::mono60);
