@@ -1,0 +1,18 @@
+{
+	"extension": {
+		"version": "0.3.0",
+		"json": 1
+	},
+	"project": {
+		"name": "FieldTimer",
+		"description": "Field timer using Gen 2 brain to do sounds, count down, play sounds.",
+		"creationDate": "2/8/2023, 6:27:10 PM",
+		"platform": "IQ2",
+		"language": "cpp",
+		"slot": 1,
+		"sdkVersion": "IQ2_20220726_10_00_00",
+		"cpp": {
+			"includePath": []
+		}
+	}
+}
